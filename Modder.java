@@ -6,7 +6,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-public class PassSaver
+public class Modder
 {
 
 JButton b1,b2,b3,b4,b5,b6;
@@ -39,16 +39,14 @@ p2=new JPanel();
 p3=new JPanel();
 p4=new JPanel();
 
-l1=new JLabel("Username");
-l2=new JLabel("Password");
-l3=new JLabel("Website ");
+l1=new JLabel("Name with Location of the recipe file");
+l2=new JLabel("[Ex "c:\Program Files\COD MW3\players2\default.dspl"");
+l3=new JLabel("You will use this in making your server ! ");
 
 b1=new JButton("Save");
 b2=new JButton("Clear All");
 b3=new JButton("Clear Field");
-b4=new JButton("Clear Field");
-b5=new JButton("Clear Field");
-b6=new JButton("");
+b4=new JButton("");
 
 t1=new JTextArea(1,20);
 t2=new JTextArea(1,20);
@@ -57,24 +55,17 @@ t3=new JTextArea(1,20);
 list=new JList(listContents);
 
 
-b3.addActionListener(new WebsiteActionListener());
-b4.addActionListener(new UsernameActionListener());
-b5.addActionListener(new PasswordActionListener());
+b3.addActionListener(new B3ActionListener());
 b2.addActionListener(new B2ActionListener());
 b1.addActionListener(new SaveActionListener());
 
-p1.add(l3);
-p1.add(t3);
-p1.add(b5);
-p2.add(l1);
-p2.add(t1);
-p2.add(b3);
-p3.add(l2);
-p3.add(t2);
-p3.add(b4);
+p1.add(l1);
+p1.add(t1);
+p2.add(l2);
+p3.add(l3);
 p4.add(b1);
 p4.add(b2);
-p4.add(b6);
+p4.add(b3);
 
 
 p0.setLayout(new BoxLayout(p0,BoxLayout.Y_AXIS));
@@ -94,7 +85,7 @@ frame.setVisible(true);
 
 }
 
-class WebsiteActionListener implements ActionListener
+class SaveActionListener implements ActionListener
 {
 public void actionPerformed(ActionEvent e)
 {
@@ -102,19 +93,11 @@ t1.setText("");
 }
 }
 
-class UsernameActionListener implements ActionListener
+class B3ActionListener implements ActionListener
 {
 public void actionPerformed(ActionEvent e)
 {
-t2.setText("");
-}
-}
- 
-class PasswordActionListener implements ActionListener
-{
-public void actionPerformed(ActionEvent e)
-{
-t3.setText("");
+t1.setText("default.dspl");
 }
 }
 
@@ -123,8 +106,6 @@ class B2ActionListener implements ActionListener
 public void actionPerformed(ActionEvent e)
 {
 t1.setText("");
-t2.setText("");
-t3.setText("");
 }
 }
 
@@ -139,13 +120,13 @@ System.out.println(t3.getText());
 
 try
 {
-File file=new File("usp.txt");
+File file=new File(t1.getText());
 
 if (!file.exists())
 {
 file.createNewFile(); 
 FileWriter tempFOS= new FileWriter(file,true);
-String tempString="gmail.com\n\nyahoo.com\n\nhotmail.com";
+String tempString="*,tunngle,1";
 tempFOS.write(tempString);
 tempFOS.close();
 }
@@ -158,17 +139,16 @@ FileWriter fOS;
 while((seeker=br.readLine())!=null)
 {
 
-fOS= new FileWriter(new File("temp.txt"),true);
-fOS.write("\n");
 
-if((t3.getText()).equals(seeker))
+if(!(t1.getText().substr(0,2)).equals("//"))
 {
-String toWrite=t1.getText()+"/"+t2.getText();
-fOS.write("\n");
-fOS.write(toWrite);
+System.out.println("Burrahahaha");
+//String toWrite=t1.getText()+"/"+t2.getText();
+//fOS.write("\n");
+//fOS.write(toWrite);
 }
 
-fOS.write(seeker);
+//fOS.write(seeker);
 
 }
 fOS.close();
