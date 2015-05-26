@@ -22,16 +22,16 @@ String seeker;
 public static void main(String args[])
 {
 
-PassSaver abc=new PassSaver();
+Modder abc=new Modder();
 abc.go();
 }
 
 public void go()
 {
 
-String[] listContents={"gmail.com","yahoo.com","hotmail.com"};
+String[] listContents={"FFA_Default.dsr","TD_Default.dsr","TDEF_Default.dsr"};
 
-frame=new JFrame("Password Saver Advanced- by SHOBHIT");
+frame=new JFrame("COD MW3 MODDER- by SHOBHIT PANT");
 
 p0=new JPanel();
 p1=new JPanel();
@@ -40,17 +40,13 @@ p3=new JPanel();
 p4=new JPanel();
 
 l1=new JLabel("Name with Location of the recipe file");
-l2=new JLabel("[Ex "c:\Program Files\COD MW3\players2\default.dspl"");
-l3=new JLabel("You will use this in making your server ! ");
+l2=new JLabel("[Ex \"c:\\Program Files\\COD MW3\\players2\\default.dspl\"");
 
 b1=new JButton("Save");
 b2=new JButton("Clear All");
 b3=new JButton("Clear Field");
-b4=new JButton("");
 
-t1=new JTextArea(1,20);
-t2=new JTextArea(1,20);
-t3=new JTextArea(1,20);
+t1=new JTextArea(2,20);
 
 list=new JList(listContents);
 
@@ -62,17 +58,15 @@ b1.addActionListener(new SaveActionListener());
 p1.add(l1);
 p1.add(t1);
 p2.add(l2);
-p3.add(l3);
-p4.add(b1);
-p4.add(b2);
-p4.add(b3);
+p3.add(b1);
+p3.add(b2);
+p3.add(b3);
 
 
 p0.setLayout(new BoxLayout(p0,BoxLayout.Y_AXIS));
 p0.add(p1);
 p0.add(p2);
 p0.add(p3);
-p0.add(p4);
 p0.add(list);
 
 
@@ -85,13 +79,6 @@ frame.setVisible(true);
 
 }
 
-class SaveActionListener implements ActionListener
-{
-public void actionPerformed(ActionEvent e)
-{
-t1.setText("");
-}
-}
 
 class B3ActionListener implements ActionListener
 {
@@ -133,14 +120,14 @@ tempFOS.close();
 
 
 BufferedReader br=new BufferedReader(new FileReader(file));
-FileWriter fOS;
+FileWriter fOS=new FileWriter(file,true);
 
 
 while((seeker=br.readLine())!=null)
 {
 
 
-if(!(t1.getText().substr(0,2)).equals("//"))
+if(!(t1.getText().substring(0,1)).equals("////"))
 {
 System.out.println("Burrahahaha");
 //String toWrite=t1.getText()+"/"+t2.getText();
