@@ -1,3 +1,4 @@
+package perm;
 
 
 import java.io.*;
@@ -15,6 +16,7 @@ JFrame frame;
 JLabel l1,l2,l3;
 JTextArea t1,t2,t3;
 JList list;
+JComboBox jcbMap,jcbType;
 
 
 String seeker;
@@ -29,8 +31,45 @@ abc.go();
 public void go()
 {
 
-String[] listContents={"FFA_Default.dsr","TD_Default.dsr","TDEF_Default.dsr"};
+String[] typeListContents={ 
+		"*","TDM_default"
+		,"DOM_default"
+		,"CTF_default"
+		,"DZ_default"
+		,"FFA_default"
+		,"GG_default"
+		,"HQ_default"
+		,"INF_default"
+		,"JUG_default"
+		,"KC_default"
+		,"OIC_default"
+		,"SAB_default"
+		,"SD_default"
+		,"TDEF_default"
+		,"TJ_default"};
 
+
+
+String[] mapListContents=
+		{"*","mp_alpha"
+		,"mp_bootleg"
+		,"mp_bravo"
+		,"mp_carbon"
+		,"mp_dome"
+		,"mp_exchange"
+		,"mp_hardhat"
+		,"mp_interchange"
+		,"mp_lambeth"
+		,"mp_mogadishu"
+		,"mp_paris"
+		,"mp_plaza2"
+		,"mp_radar"
+		,"mp_seatown"
+		,"mp_underground"
+		,"mp_village"};
+
+jcbType= new JComboBox<String>(typeListContents);
+jcbMap= new JComboBox<String>(mapListContents);
 frame=new JFrame("COD MW3 MODDER- by SHOBHIT PANT");
 
 p0=new JPanel();
@@ -42,32 +81,30 @@ p4=new JPanel();
 l1=new JLabel("Name with Location of the recipe file");
 l2=new JLabel("[Ex \"c:\\Program Files\\COD MW3\\players2\\default.dspl\"");
 
-b1=new JButton("Save");
-b2=new JButton("Clear All");
-b3=new JButton("Clear Field");
+b1=new JButton("Save-Clear");
+b2=new JButton("Save-Append");
 
 t1=new JTextArea(2,20);
 
-list=new JList(listContents);
 
 
-b3.addActionListener(new B3ActionListener());
-b2.addActionListener(new B2ActionListener());
-b1.addActionListener(new SaveActionListener());
+b1.addActionListener(new B1ActionListener());
+b2.addActionListener(new SaveActionListener());
 
 p1.add(l1);
 p1.add(t1);
 p2.add(l2);
 p3.add(b1);
 p3.add(b2);
-p3.add(b3);
+p4.add(jcbMap);
+p4.add(jcbType);
 
 
 p0.setLayout(new BoxLayout(p0,BoxLayout.Y_AXIS));
 p0.add(p1);
 p0.add(p2);
+p0.add(p4);
 p0.add(p3);
-p0.add(list);
 
 
 
@@ -88,22 +125,13 @@ t1.setText("default.dspl");
 }
 }
 
-class B2ActionListener implements ActionListener
+class B1ActionListener implements ActionListener
 {
 public void actionPerformed(ActionEvent e)
 {
-t1.setText("");
-}
-}
-
-class SaveActionListener implements ActionListener
-{
-public void actionPerformed(ActionEvent e)
-{
+	
 
 System.out.println(t1.getText());
-System.out.println(t2.getText());
-System.out.println(t3.getText());
 
 try
 {
@@ -112,32 +140,56 @@ File file=new File(t1.getText());
 if (!file.exists())
 {
 file.createNewFile(); 
-FileWriter tempFOS= new FileWriter(file,true);
-String tempString="*,tunngle,1";
-tempFOS.write(tempString);
-tempFOS.close();
+}
+FileWriter fOS=new FileWriter(file,false);
+String toBeAdded= jcbMap.getSelectedItem()+","+jcbType.getSelectedItem()+",1\n";
+fOS.write(toBeAdded);
+fOS.close();
+
+}
+catch(Exception ex)
+{
+	ex.printStackTrace();
+}
 }
 
+}
+class SaveActionListener implements ActionListener
+{
+public void actionPerformed(ActionEvent e)
+{
 
-BufferedReader br=new BufferedReader(new FileReader(file));
+System.out.println(t1.getText());
+
+try
+{
+File file=new File(t1.getText());
+
+if (!file.exists())
+{
+file.createNewFile(); 
+}
 FileWriter fOS=new FileWriter(file,true);
+String toBeAdded= jcbMap.getSelectedItem()+","+jcbType.getSelectedItem()+",1\n";
+fOS.write(toBeAdded);
 
-
-while((seeker=br.readLine())!=null)
-{
-
-
-if(!(t1.getText().substring(0,1)).equals("////"))
-{
-System.out.println("Burrahahaha");
-//String toWrite=t1.getText()+"/"+t2.getText();
-//fOS.write("\n");
-//fOS.write(toWrite);
-}
-
-//fOS.write(seeker);
-
-}
+//
+//while((seeker=br.readLine())!=null)
+//{
+//
+//int i=0;
+////if(!(seeker.substring()).equals("////"))
+//{
+//	
+//System.out.println("Line "+i+" : "+seeker);
+////String toWrite=t1.getText()+"/"+t2.getText();
+////fOS.write("\n");
+////fOS.write(toWrite);
+//}
+//
+////fOS.write(seeker);
+//
+//}
 fOS.close();
 
 
