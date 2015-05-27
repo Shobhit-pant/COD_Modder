@@ -1,5 +1,3 @@
-package perm;
-
 
 import java.io.*;
 import java.awt.*;
